@@ -7,16 +7,8 @@ message("start make cmake_template")
 #add_definitions(-DCPP11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O3 -march=native")
 
-find_package(catkin REQUIRED COMPONENTS
-        tf
-        roscpp
-        rospy
-        )
-
 set(ALL_TARGET_LIBRARIES "")
 include(cmake/global_defination.cmake)
-
-catkin_package()
 
 include_directories(
         ${PROJECT_SOURCE_DIR}
