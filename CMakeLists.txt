@@ -24,5 +24,5 @@ file(GLOB_RECURSE THIRD_PARTY_SRCS "Thirdparty/*.cpp")
 
 # lidar slam and localize
 #add_executable(localize_map nodecpp/localize_map.cpp ${ALL_SRCS})
-#target_link_libraries(localize_map ${catkin_LIBRARIES} ${ALL_TARGET_LIBRARIES})
+#target_link_libraries(localize_map ${ALL_TARGET_LIBRARIES})
 
