@@ -9,6 +9,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -O3 -march=native")
 
 set(ALL_TARGET_LIBRARIES "")
 include(cmake/global_defination.cmake)
+include(cmake/glog.cmake)
+include(cmake/boost.cmake)
+include(cmake/eigen.cmake)
+#include(cmake/OpenCV.cmake)
 
 include_directories(
         ${PROJECT_SOURCE_DIR}
@@ -16,13 +20,11 @@ include_directories(
         ${catkin_INCLUDE_DIRS}
 )
 
-
-file(GLOB_RECURSE ALL_SRCS "*.cpp")
-file(GLOB_RECURSE THIRD_PARTY_SRCS "Thirdparty/*.cpp")
+file(GLOB_RECURSE ALL_SRCS "src/*.cpp")
+#file(GLOB_RECURSE THIRD_PARTY_SRCS "Thirdparty/*.cpp")
 #list(REMOVE_ITEM ALL_SRCS ${THIRD_PARTY_SRCS})
 
 
-# lidar slam and localize
-#add_executable(localize_map nodecpp/localize_map.cpp ${ALL_SRCS})
-#target_link_libraries(localize_map ${ALL_TARGET_LIBRARIES})
+add_executable(main node/main.cpp ${ALL_SRCS})
+target_link_libraries(main ${ALL_TARGET_LIBRARIES})
 
