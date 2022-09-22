@@ -1,0 +1,7 @@
+<launch>
+
+
+    <!--publish topics-->
+    <node pkg="ros_package_template" type="point_cloud" name="point_cloud" output="log"/>
+
+</launch>

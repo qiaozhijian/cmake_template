@@ -9,7 +9,8 @@
 #include <string>
 //
 
-namespace cmake_template {
+namespace ros_package_template {
     const std::string WORK_SPACE_PATH = "@WORK_SPACE_PATH@";
+    const std::string MATCH_YAML_PATH = WORK_SPACE_PATH + "/config/template.yaml";
 }
 #endif
