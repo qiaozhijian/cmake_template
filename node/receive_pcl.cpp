@@ -12,7 +12,7 @@ using namespace std;
 ///////主函数
 int main(int argc, char **argv) {
 
-    ros::init(argc, argv, "ros_package_template");
+    ros::init(argc, argv, "receive_pcl");
     ros::NodeHandle nh("~");
 
     google::InitGoogleLogging(argv[0]);
@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 
     ros_package_template::System system(nh);
 
-    LOG(INFO)<<"Return.";
+    ros::spin();
 
     return 0;
 }

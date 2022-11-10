@@ -24,6 +24,12 @@ include_directories(
 
 file(GLOB_RECURSE ALL_SRCS "src/*.cpp")
 
-add_executable(point_cloud node/point_cloud.cpp ${ALL_SRCS})
-target_link_libraries(point_cloud ${ALL_TARGET_LIBRARIES})
+add_executable(receive_pcl node/receive_pcl.cpp ${ALL_SRCS})
+target_link_libraries(receive_pcl ${ALL_TARGET_LIBRARIES})
+
+catkin_install_python(PROGRAMS
+        node/parse_rosbag.py
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+        )
+
 

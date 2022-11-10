@@ -1,13 +1,17 @@
 <launch>
     <!--- Sim Time -->
-    <param name="/use_sim_time" value="true" />
+    <param name="/use_sim_time" value="false" />
+    <rosparam command="load" file="$(find ros_package_template)/config/template.yaml"/>
+    <arg name="bag" default=" /media/qzj/Extreme\ SSD/datasets/OpenLane/rosbag/segment-9350921499281634194_2403_251_2423_251_with_camera_labels.bag"/>
+
     <!--- TF -->
     <node pkg="tf" type="static_transform_publisher" name="pandar_init_to_map"  args="0 0 0 0 0 0 /map /base_link 10" />
+<!--    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ros_package_template)/launch/default.rviz"></node>-->
+    <node pkg="ros_package_template" type="receive_pcl" name="receive_pcl" output="screen"/>
+    <node pkg="ros_package_template" type="parse_rosbag.py" name="parse_rosbag" output="screen" args="--bag_file $(arg bag)"/>
 
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ros_package_template)/launch/default.rviz"></node>
-
-    <include
-            file="$(find ros_package_template)/launch/public.launch">
-    </include>
+    <group if="$(eval optenv('/use_sim_time') == 'true')">
+        <node pkg="rosbag" type="play" output="log" name="rosbag" args=" --clock $(arg bag) -r 4 -s 0"/>
+    </group>
 
 </launch>

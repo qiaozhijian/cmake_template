@@ -38,3 +38,6 @@ build
 Log
 
 data/*
+
+.idea
+__pycache__

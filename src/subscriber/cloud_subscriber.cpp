@@ -38,6 +38,7 @@ namespace ros_package_template {
             pcl::fromROSMsg(*cloud_msg_ptr, *(cloud_ring_data.cloud_ptr));
             new_cloud_ring_data_.push_back(cloud_ring_data);
         }
+        LOG(INFO) << "new_cloud_data_.size(): " << new_cloud_data_.size();
         buff_mutex_.unlock();
     }
 
