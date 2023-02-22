@@ -29,9 +29,9 @@ Eigen::Matrix<T,4,4> EigenIsoInv(const Eigen::Matrix<T,4,4> &Tcw) {
     return Twc;
 }
 
-void Config::readConfig(){
+void Config::readConfig(std::string config_path){
 
-    config_node_ = YAML::LoadFile(ros_package_template::MATCH_YAML_PATH);
+    config_node_ = YAML::LoadFile(config_path);
 
     lidar_topic = config_node_["lidar_topic"].as<std::string>();
 

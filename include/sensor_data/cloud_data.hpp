@@ -8,7 +8,6 @@
 
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
-#include "global_defination/global_defination.h"
 
 
 /*

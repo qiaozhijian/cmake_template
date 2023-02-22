@@ -6,7 +6,6 @@
 #define SRC_CONFIG_H
 
 #include <yaml-cpp/yaml.h>
-#include "global_defination/global_defination.h"
 #include <Eigen/Core>
 #include <vector>
 #include <Eigen/Geometry>
@@ -20,7 +19,7 @@ class Config {
 public:
 
     Config(){}
-    static void readConfig();
+    static void readConfig(std::string config_path);
 
 public:
 

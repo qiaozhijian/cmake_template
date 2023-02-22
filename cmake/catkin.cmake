@@ -1,8 +1,16 @@
+
 find_package(catkin REQUIRED COMPONENTS
-        tf
         roscpp
+        std_msgs
         rospy
+        tf
+        roslib
         )
+
+catkin_package(
+        INCLUDE_DIRS include
+        CATKIN_DEPENDS roscpp std_msgs
+)
 catkin_package()
 
 include_directories(

@@ -15,15 +15,18 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "receive_pcl");
     ros::NodeHandle nh("~");
 
+    std::string project_path = ros::package::getPath("ros_package_template");
+    std::string config_path = project_path + "/config/template.yaml";
+
     google::InitGoogleLogging(argv[0]);
-    FLAGS_log_dir = ros::package::getPath("ros_package_template") + "/Log";
+    FLAGS_log_dir = project_path + "/Log";
     FLAGS_alsologtostderr = true;
     FLAGS_colorlogtostderr = true;
     FLAGS_log_prefix = true;
     FLAGS_logbufsecs = 0;
     FileManager::CreateDirectory(FLAGS_log_dir);
 
-    Config::readConfig();
+    Config::readConfig(config_path);
 
     ros_package_template::System system(nh);
 
