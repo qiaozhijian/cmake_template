@@ -2,9 +2,10 @@
 #include <string>
 #include "glog/logging.h"
 #include "file_manager.hpp"
-#include <Eigen/Core>
+#include <Eigen/Dense>
 #include "global_defination/global_defination.h"
 #include "System.h"
+#include "eigen_utils.h"
 
 using namespace std;
 

@@ -11,6 +11,8 @@ include(cmake/boost.cmake)
 include(cmake/global_defination.cmake)
 include(cmake/geographic.cmake)
 include(cmake/glog.cmake)
+include(cmake/eigen.cmake)
+include(cmake/OpenCV.cmake)
 
 include_directories(
         ${PROJECT_SOURCE_DIR}
