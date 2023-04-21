@@ -1,20 +1,20 @@
-
 find_package(catkin REQUIRED COMPONENTS
-        roscpp
-        std_msgs
-        rospy
         tf
+        roscpp
+        rospy
         roslib
+        std_msgs
+        geometry_msgs
+        message_generation
+        sensor_msgs
+        nav_msgs
+        pcl_ros
+        cv_bridge
+        eigen_conversions
         )
-
-catkin_package(
-        INCLUDE_DIRS include
-        CATKIN_DEPENDS roscpp std_msgs
-)
 catkin_package()
 
 include_directories(
         ${catkin_INCLUDE_DIRS}
 )
-
 list(APPEND ALL_TARGET_LIBRARIES ${catkin_LIBRARIES})

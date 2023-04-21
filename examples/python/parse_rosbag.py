@@ -12,9 +12,9 @@ import numpy as np
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_DIR)
 
-from py_src.ros_utils.cloud_publisher import CloudPublisher
-from py_src.ros_utils.pose_publisher import PosePublisher
-from py_src.config import get_config
+from python.ros_utils.cloud_publisher import CloudPublisher
+from python.ros_utils.pose_publisher import PosePublisher
+from python.config import get_config
 
 if __name__ == '__main__':
 
