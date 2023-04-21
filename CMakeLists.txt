@@ -22,6 +22,5 @@ include_directories(
 
 file(GLOB_RECURSE ALL_SRCS "src/*.cpp")
 
-add_executable(template_node node/template_node.cpp ${ALL_SRCS})
-target_link_libraries(template_node ${ALL_TARGET_LIBRARIES})
+include(cmake/executable.cmake)
 
