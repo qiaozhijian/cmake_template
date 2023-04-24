@@ -3,7 +3,7 @@
 #include "glog/logging.h"
 #include "file_manager.hpp"
 #include <Eigen/Dense>
-#include "global_defination/global_defination.h"
+#include "global_definition/global_definition.h"
 #include "System.h"
 #include "lie_utils.h"
 
