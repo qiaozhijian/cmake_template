@@ -9,7 +9,8 @@
 #include <string>
 //
 
-namespace cmake_template {
+namespace config {
     const std::string WORK_SPACE_PATH = "@WORK_SPACE_PATH@";
+    const std::string MATCH_YAML_PATH = WORK_SPACE_PATH + "/configs/template.yaml";
 }
 #endif

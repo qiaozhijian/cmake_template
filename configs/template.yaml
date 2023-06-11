@@ -1,0 +1,8 @@
+dataset:
+  name: kitti
+  dataset_path: /media/qzj/Document/datasets/KITTI/odometry/data_odometry_velodyne/dataset/sequences
+  split_dir: configs/data_split/kitti
+  label_dir: "labels_salsanext"
+
+  min_range: 0.5 # 0.5 minimum range of lidar
+  max_range: 60 # 80 maximum range of lidar

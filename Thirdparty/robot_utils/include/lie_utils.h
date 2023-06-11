@@ -14,22 +14,16 @@
 #include <cstring>
 #include <eigen3/Eigen/Dense>
 #include <iostream>
-#include <vector>
 #include <random>
 
-template<typename T>
-inline T R2Angle(const Eigen::Matrix<T, 3, 3> &R, bool is_degree = false) {
-    double a = (R(0, 0) + R(1, 1) + R(2, 2) - 1) / 2;
-    if (a > 1) {
-        a = 1;
-    } else if (a < -1) {
-        a = -1;
-    }
-    T angle = acos(a);
-    if (is_degree) {
-        angle = angle * 180.0 / M_PI;
-    }
-    return angle;
+template<typename Derived>
+Eigen::Matrix<typename Derived::Scalar, 3, 3>
+skewSymmetric(const Eigen::MatrixBase<Derived> &q) {
+    Eigen::Matrix<typename Derived::Scalar, 3, 3> ans;
+    ans << typename Derived::Scalar(0), -q(2), q(1),
+            q(2), typename Derived::Scalar(0), -q(0),
+            -q(1), q(0), typename Derived::Scalar(0);
+    return ans;
 }
 
 template<typename Derived>
@@ -46,16 +40,6 @@ deltaQ(const Eigen::MatrixBase<Derived> &theta) {
     dq.z() = half_theta.z();
     dq.normalize();
     return dq;
-}
-
-template<typename Derived>
-Eigen::Matrix<typename Derived::Scalar, 3, 3>
-skewSymmetric(const Eigen::MatrixBase<Derived> &q) {
-    Eigen::Matrix<typename Derived::Scalar, 3, 3> ans;
-    ans << typename Derived::Scalar(0), -q(2), q(1),
-            q(2), typename Derived::Scalar(0), -q(0),
-            -q(1), q(0), typename Derived::Scalar(0);
-    return ans;
 }
 
 template<typename Derived>
@@ -82,6 +66,21 @@ Qright(const Eigen::QuaternionBase<Derived> &p) {
                                                        Eigen::Matrix<typename Derived::Scalar, 3, 3>::Identity() -
                                                        skewSymmetric(pp.vec());
     return ans;
+}
+
+template<typename T>
+inline T R2Angle(const Eigen::Matrix<T, 3, 3> &R, bool is_degree = true) {
+    T a = (R(0, 0) + R(1, 1) + R(2, 2) - 1) / 2;
+    if (a > 1) {
+        a = 1;
+    } else if (a < -1) {
+        a = -1;
+    }
+    T angle = acos(a);
+    if (is_degree) {
+        angle = angle * 180.0 / M_PI;
+    }
+    return angle;
 }
 
 template<typename Derived>
@@ -151,43 +150,4 @@ ypr2R(const Eigen::MatrixBase<Derived> &ypr) {
             0., sin(r), cos(r);
 
     return Rz * Ry * Rx;
-}
-
-template<typename T>
-Eigen::Matrix<T, 3, 3> randomRotation(const T &angle_bound) {
-    Eigen::Matrix<T, 3, 1> axis = Eigen::Matrix<T, 3, 1>::Random();
-    axis.normalize();
-    // random [-1, 1]
-    T angle = angle_bound * Eigen::internal::random<T>() / 180.0 * M_PI;
-    return Eigen::AngleAxis<T>(angle, axis).toRotationMatrix();
-}
-
-template<typename T>
-Eigen::Matrix<T, 3, 1> randomTranslation(const T &translation_bound) {
-    // random [-1, 1] for each element
-    return Eigen::Matrix<T, 3, 1>::Random() * translation_bound;
-}
-
-template<typename T>
-Eigen::Matrix<T, 4, 4> randomTransformation(const T &angle_bound, const T &translation_bound) {
-    Eigen::Matrix<T, 4, 4> ans = Eigen::Matrix<T, 4, 4>::Identity();
-    ans.template block<3, 3>(0, 0) = randomRotation(angle_bound);
-    ans.template block<3, 1>(0, 3) = randomTranslation(translation_bound);
-    return ans;
-}
-
-inline double random_normal(double std) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::normal_distribution<double> dis(0, std);
-    double number = dis(gen);
-    return number;
-}
-
-inline double random_uniform(double min, double max) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> dis(min, max);
-    double number = dis(gen);
-    return number;
 }

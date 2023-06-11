@@ -5,6 +5,8 @@
 #ifndef CMAKE_TEMPLATE_SYSTEM_H
 #define CMAKE_TEMPLATE_SYSTEM_H
 
+#include <iostream>
+#include <tic_toc.h>
 
 class System {
 

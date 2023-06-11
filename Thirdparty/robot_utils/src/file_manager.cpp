@@ -1,19 +1,10 @@
-/*
- * @Description: file manager
- * @Author: Zhijian Qiao
- * @Date: 2020-02-24 19:22:53
- */
-#ifndef TOOLS_FILE_MANAGER_HPP_
-#define TOOLS_FILE_MANAGER_HPP_
-
-#include <string>
-#include <iostream>
-#include <fstream>
+#include "file_manager.h"
 #include <boost/filesystem.hpp>
 
-class FileManager {
-public:
-    static bool CreateFile(std::ofstream &ofs, std::string file_path) {
+using namespace std;
+
+namespace FileManager{
+    bool CreateFile(std::ofstream &ofs, std::string file_path) {
         ofs.close();
         boost::filesystem::remove(file_path.c_str());
 
@@ -26,7 +17,7 @@ public:
         return true;
     }
 
-    static bool InitDirectory(std::string directory_path) {
+    bool InitDirectory(std::string directory_path) {
         if (boost::filesystem::is_directory(directory_path)) {
             boost::filesystem::remove_all(directory_path);
         }
@@ -34,7 +25,7 @@ public:
         return CreateDirectory(directory_path);
     }
 
-    static bool CreateDirectory(std::string directory_path) {
+    bool CreateDirectory(std::string directory_path) {
         if (!boost::filesystem::is_directory(directory_path)) {
             boost::filesystem::create_directory(directory_path);
         }
@@ -46,6 +37,18 @@ public:
 
         return true;
     }
-};
 
-#endif
+    int CountFiles(std::string directory_path, std::string suffix){
+        int count = 0;
+        boost::filesystem::path directory(directory_path);
+        boost::filesystem::directory_iterator end_iter;
+        for (boost::filesystem::directory_iterator iter(directory); iter != end_iter; iter++) {
+            if (boost::filesystem::is_regular_file(iter->status())) {
+                if (iter->path().extension() == suffix) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
